@@ -42,8 +42,25 @@ class MdEditor extends React.Component {
       this.setState({
         f_history
       })
+
+      this.initData(props.value)
       this.handleLineIndex(props.value)
     }
+  }
+
+  initData(value) {
+    let str = ''
+    const arr = value.split('\n')
+    arr.forEach((item, index) => {
+      if (!item) item = '<br>'
+      str =
+        str +
+        `<div class="for-line">
+          <div class="for-line-num" contenteditable="false">${index + 1}</div>
+          <div>${item}</div>
+        </div>`
+    })
+    this.$vm.innerHTML = str
   }
 
   // 输入框改变
@@ -231,15 +248,18 @@ class MdEditor extends React.Component {
             <div className="for-editor-wrapper">
               {/* <div className="for-editor-wrapper-in"> */}
               <div className="for-editor-block">
-                {lineNum()}
+                {/* {lineNum()} */}
                 <div className="for-editor-content">
-                  <pre>{value} </pre>
-                  <textarea
+                  {/* <pre>{value} </pre> */}
+                  <div
                     ref={this.handleEditorRef}
-                    value={value}
+                    contentEditable
+                    // value={value}
                     onChange={this.handleChange}
                     placeholder={this.props.placeholder}
-                  />
+                  >
+                    {/* {value} */}
+                  </div>
                 </div>
               </div>
               {/* </div> */}
