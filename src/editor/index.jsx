@@ -178,31 +178,31 @@ class MdEditor extends React.Component {
       <div className={fullscreen} style={{ height: this.props.height }}>
         <div className="for-controlbar">
           <ul>
-            <li onClick={this.undo} title="上一步 (ctrl+z)">
+            <li onClick={this.undo} title={lang[this.props.lang].undo}>
               <i className="foricon for-undo" />
             </li>
-            <li onClick={this.redo} title="下一步 (ctrl+y)">
+            <li onClick={this.redo} title={lang[this.props.lang].redo}>
               <i className="foricon for-redo" />
             </li>
-            <li data-type="h1" onClick={this.insert} title="一级标题">
+            <li data-type="h1" onClick={this.insert} title={lang[this.props.lang].h1}>
               H1
             </li>
-            <li data-type="h2" onClick={this.insert} title="二级标题">
+            <li data-type="h2" onClick={this.insert} title={lang[this.props.lang].h2}>
               H2
             </li>
-            <li data-type="h3" onClick={this.insert} title="三级标题">
+            <li data-type="h3" onClick={this.insert} title={lang[this.props.lang].h3}>
               H3
             </li>
-            <li data-type="h4" onClick={this.insert} title="四级标题">
+            <li data-type="h4" onClick={this.insert} title={lang[this.props.lang].h4}>
               H4
             </li>
-            <li data-type="image" onClick={this.insert} title="图片">
+            <li data-type="image" onClick={this.insert} title={lang[this.props.lang].image}>
               <i className="foricon for-image" />
             </li>
-            <li data-type="link" onClick={this.insert} title="超链接">
+            <li data-type="link" onClick={this.insert} title={lang[this.props.lang].link}>
               <i className="foricon for-link" />
             </li>
-            <li data-type="code" onClick={this.insert} title="代码块">
+            <li data-type="code" onClick={this.insert} title={lang[this.props.lang].code}>
               <i className="foricon for-code" />
             </li>
             <li data-type="code" onClick={this.save} title="保存 (ctrl+s)">
@@ -238,7 +238,7 @@ class MdEditor extends React.Component {
                     ref={this.handleEditorRef}
                     value={value}
                     onChange={this.handleChange}
-                    placeholder={this.props.placeholder}
+                    placeholder={lang[this.props.lang].placeholder}
                   />
                 </div>
               </div>

@@ -80,6 +80,7 @@ const editor = 'for-editor'
           value={value}
           onChange={this.handleChange}
           onSave={this.handleSave}
+          lang="en"
         />
       </div>
     )
