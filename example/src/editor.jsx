@@ -81,6 +81,10 @@ const editor = 'for-editor'
           onChange={this.handleChange}
           onSave={this.handleSave}
           lang="en"
+          controlbar={true}
+          allowfullscreen={false}
+          allowpreview={false}
+          allowsave={false}
         />
       </div>
     )

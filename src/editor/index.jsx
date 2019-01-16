@@ -3,6 +3,7 @@ import './index.scss'
 import classNames from 'classnames'
 import marked from '../helpers/marked'
 import textInsert from '../helpers/insertText'
+import lang from '../helpers/lang'
 import keydownListen from '../helpers/keydownListen'
 import 'highlight.js/styles/tomorrow.css'
 import '../fonts/iconfont.css'
@@ -26,9 +27,13 @@ class MdEditor extends React.Component {
   }
 
   static defaultProps = {
-    placeholder: '请输入内容...',
     lineNum: true,
-    height: '600px'
+    height: '600px',
+    controlbar: true,
+    allowfullscreen: true,
+    allowpreview: true,
+    allowsave: true,
+    lang: 'zh'
   }
 
   componentDidMount() {
@@ -138,7 +143,7 @@ class MdEditor extends React.Component {
 
   // 保存
   save = () => {
-    this.props.onSave()
+    if (this.props.allowsave) this.props.onSave()
   }
 
   render() {
@@ -166,7 +171,7 @@ class MdEditor extends React.Component {
       hidden: !this.props.lineNum
     })
 
-    const lineNum = function() {
+    const lineNum = function () {
       const list = []
       for (let i = 0; i < line_index; i++) {
         list.push(<li key={i + 1}>{i + 1}</li>)
@@ -176,7 +181,7 @@ class MdEditor extends React.Component {
 
     return (
       <div className={fullscreen} style={{ height: this.props.height }}>
-        <div className="for-controlbar">
+        {this.props.controlbar && <div className="for-controlbar">
           <ul>
             <li onClick={this.undo} title={lang[this.props.lang].undo}>
               <i className="foricon for-undo" />
@@ -205,27 +210,27 @@ class MdEditor extends React.Component {
             <li data-type="code" onClick={this.insert} title={lang[this.props.lang].code}>
               <i className="foricon for-code" />
             </li>
-            <li data-type="code" onClick={this.save} title="保存 (ctrl+s)">
+            {this.props.allowsave && <li data-type="code" onClick={this.save} title={lang[this.props.lang].save}>
               <i className="foricon for-save" />
-            </li>
+            </li>}
           </ul>
           <ul>
-            <li className={expandActive} onClick={this.expand}>
+            {this.props.allowfullscreen && <li className={expandActive} onClick={this.expand}>
               {expandActive ? (
                 <i className="foricon for-contract" />
               ) : (
-                <i className="foricon for-expand" />
-              )}
-            </li>
-            <li className={previewActive} onClick={this.preview}>
+                  <i className="foricon for-expand" />
+                )}
+            </li>}
+            {this.props.allowpreview && <li className={previewActive} onClick={this.preview}>
               {previewActive ? (
                 <i className="foricon for-eye-off" />
               ) : (
-                <i className="foricon for-eye" />
-              )}
-            </li>
+                  <i className="foricon for-eye" />
+                )}
+            </li>}
           </ul>
-        </div>
+        </div>}
         <div className="for-editor">
           <div className={editorClass}>
             <div className="for-editor-wrapper">
